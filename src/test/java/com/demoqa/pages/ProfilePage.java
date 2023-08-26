@@ -86,7 +86,17 @@ public class ProfilePage {
         return this;
     }
 
-    public ProfilePage verifyEloquentJSDeletedFromProfile() {
+    public ProfilePage verifyGitPocketGuideIsAbsent() {
+        gitPocketGuideBook.shouldNotBe(visible);
+        return this;
+    }
+
+    public ProfilePage verifyDesigningWebAPIsIsAbsent() {
+        designingWebAPIsBook.shouldNotBe(visible);
+        return this;
+    }
+
+    public ProfilePage verifyEloquentJSIsAbsent() {
         refresh();
         eloquentJSBook.shouldNotBe(visible);
         return this;

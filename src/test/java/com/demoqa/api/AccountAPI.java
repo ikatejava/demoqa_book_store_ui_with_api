@@ -61,11 +61,11 @@ public class AccountAPI {
                 .spec(successfulDeletionResponseSpec204);
     }
 
-    public void unauthorizedAccountDeletion(RegistrationResponseModel registrationResponse) {
+    public void unauthorizedAccountDeletion(LoginResponseModel loginResponse) {
         MistakesResponseModel mistakesResponse = step("Make request", () -> {
             return given(accountRequestWithBodySpecification)
                     .when()
-                    .delete("User/" + registrationResponse.getUserID())
+                    .delete("User/" + loginResponse.getUserId())
                     .then()
                     .spec(unauthorizedAccountFailedTestsResponseSpec401)
                     .extract().as(MistakesResponseModel.class);

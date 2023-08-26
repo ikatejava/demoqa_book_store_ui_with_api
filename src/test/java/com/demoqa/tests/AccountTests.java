@@ -84,7 +84,7 @@ public class AccountTests extends TestBase {
             profilePage.checkMainHeader()
                     .checkAuthorizedUserName(validRegData.getUserName());
         });
-        step("Log in via API so to get token, check authorization, delete account", () -> {
+        step("Log in via API so to get token, delete account", () -> {
             LoginResponseModel loginResponse = AccountAPI.login(validRegData);
 
             accountAPI.successfulAccountDeletion(loginResponse);
@@ -103,22 +103,27 @@ public class AccountTests extends TestBase {
     @Tag("negative")
     @DisplayName("Try to delete account without sending authorization token (failure)")
     void unauthorizedAccountDeletionTest() {
-        step("Try to delete newly created user without sending authorization token", () -> {
+        step("Create new user, get response body cookies and add them to small file", () -> {
             RegistrationResponseModel registrationResponse = AccountAPI.newUser(validRegData);
 
             cookiesPage.openFileToAddCookies()
                     .addCookies(userIdCookie, registrationResponse.getUserID())
                     .addCookies(usernameCookie, registrationResponse.getUsername());
-
+        });
+        step("Fill out authorization form on website", () -> {
             loginPage.openLoginPage()
                     .inputUserName(validRegData.getUserName())
                     .inputUserPassword(validRegData.getPassword())
                     .clickLoginButton();
-
+        });
+        step("Check that the user is authorized", () -> {
             profilePage.checkMainHeader()
                     .checkAuthorizedUserName(validRegData.getUserName());
+        });
+        step("Log in via API, try to delete account without sending authorization token", () -> {
+            LoginResponseModel loginResponse = AccountAPI.login(validRegData);
 
-            accountAPI.unauthorizedAccountDeletion(registrationResponse);
+            accountAPI.unauthorizedAccountDeletion(loginResponse);
         });
         step("Log out", () -> {
             profilePage.clickLogoutButton();
