@@ -1,6 +1,7 @@
 package com.demoqa.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class BookModel {

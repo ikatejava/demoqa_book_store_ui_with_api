@@ -14,6 +14,7 @@ public class CookiesPage {
         open(loginPagePath);
         return this;
     }
+
     public CookiesPage addCookies(String name, String value) {
         getWebDriver().manage().addCookie(new Cookie(name, value));
         return this;

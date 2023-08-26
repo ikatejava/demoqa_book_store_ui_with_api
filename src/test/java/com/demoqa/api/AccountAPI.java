@@ -1,7 +1,9 @@
 package com.demoqa.api;
 
 import com.demoqa.models.*;
-import static com.demoqa.specs.RequestSpecs.*;
+
+import static com.demoqa.specs.RequestSpecs.accountRequestWithBodySpecification;
+import static com.demoqa.specs.RequestSpecs.accountRequestWithoutBodySpecification;
 import static com.demoqa.specs.ResponseSpecs.*;
 import static com.demoqa.tests.TestData.*;
 import static io.qameta.allure.Allure.step;

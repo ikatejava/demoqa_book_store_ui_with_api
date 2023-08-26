@@ -1,12 +1,14 @@
 package com.demoqa.tests;
 
 import com.demoqa.api.AccountAPI;
-import com.demoqa.models.*;
-import static com.demoqa.tests.TestData.*;
-
+import com.demoqa.models.LoginResponseModel;
+import com.demoqa.models.RegistrationResponseModel;
+import com.demoqa.models.UserInfoResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import static com.demoqa.tests.TestData.*;
 import static io.qameta.allure.Allure.step;
 
 public class AccountTests extends TestBase {
@@ -82,17 +84,8 @@ public class AccountTests extends TestBase {
             profilePage.checkMainHeader()
                     .checkAuthorizedUserName(validRegData.getUserName());
         });
-        step("Authorize via API so to get token, check authorization, delete account", () -> {
+        step("Log in via API so to get token, check authorization, delete account", () -> {
             LoginResponseModel loginResponse = AccountAPI.login(validRegData);
-
-            cookiesPage.openFileToAddCookies()
-                    .addCookies(userIdCookie, loginResponse.getUserId())
-                    .addCookies(tokenCookie, loginResponse.getToken())
-                    .addCookies(expiresCookie, loginResponse.getExpires());
-
-            profilePage.openProfilePage()
-                    .checkMainHeader()
-                    .checkAuthorizedUserName(validRegData.getUserName());
 
             accountAPI.successfulAccountDeletion(loginResponse);
         });

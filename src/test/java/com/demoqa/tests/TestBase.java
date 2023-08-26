@@ -1,11 +1,14 @@
 package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
-import com.demoqa.api.*;
+import com.demoqa.api.AccountAPI;
+import com.demoqa.api.BooksAPI;
 import com.demoqa.config.WebConfig;
-import com.demoqa.models.*;
-import com.demoqa.pages.*;
-
+import com.demoqa.models.IsbnModel;
+import com.demoqa.models.LoginAndRegistrationRequestModel;
+import com.demoqa.pages.CookiesPage;
+import com.demoqa.pages.LoginPage;
+import com.demoqa.pages.ProfilePage;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;

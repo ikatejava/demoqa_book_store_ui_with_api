@@ -1,7 +1,8 @@
 package com.demoqa.models;
 
-import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.util.List;
 
 @Data

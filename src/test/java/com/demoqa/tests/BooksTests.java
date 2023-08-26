@@ -1,8 +1,9 @@
 package com.demoqa.tests;
 
 import com.demoqa.api.AccountAPI;
-import com.demoqa.models.*;
-
+import com.demoqa.models.AddBookModel;
+import com.demoqa.models.DeleteBookModel;
+import com.demoqa.models.LoginResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
