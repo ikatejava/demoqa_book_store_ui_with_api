@@ -17,7 +17,7 @@ public class BooksTests extends TestBase {
     @Tag("positive")
     @DisplayName("Add books to user profile via API")
     void addBooksToProfileSuccessfulTest() {
-        step("Authorize and add books to profile via API", () -> {
+        step("Log in and add books to profile via API", () -> {
             LoginResponseModel loginResponse = AccountAPI.login(validAuthData);
             booksAPI.deleteAllBooks(loginResponse);
 
@@ -50,14 +50,29 @@ public class BooksTests extends TestBase {
     @Tag("negative")
     @DisplayName("Try to add book with non-existent ISBN to user profile via API (failure)")
     void addBookWithNonExistentISBNTest() {
-        LoginResponseModel loginResponse = AccountAPI.login(validAuthData);
-        booksAPI.deleteAllBooks(loginResponse);
+        step("Log in and try to add book with non-existent ISBN to profile via API", () -> {
+            LoginResponseModel loginResponse = AccountAPI.login(validAuthData);
+            booksAPI.deleteAllBooks(loginResponse);
 
-        isbnList.add(nonExistentBook);
+            isbnList.add(nonExistentBook);
 
-        AddBookModel booksList = new AddBookModel(loginResponse.getUserId(), isbnList);
+            AddBookModel booksList = new AddBookModel(loginResponse.getUserId(), isbnList);
 
-        booksAPI.addBookWithNonExistentISBN(loginResponse, booksList);
+            booksAPI.addBookWithNonExistentISBN(loginResponse, booksList);
+
+            cookiesPage.openFileToAddCookies()
+                    .addCookies(userIdCookie, loginResponse.getUserId())
+                    .addCookies(tokenCookie, loginResponse.getToken())
+                    .addCookies(expiresCookie, loginResponse.getExpires());
+        });
+        step("Check user's profile on website", () -> {
+            profilePage.openProfilePage()
+                    .checkMainHeader()
+                    .checkAuthorizedUserName(validAuthData.getUserName());
+        });
+        step("Log out", () -> {
+            profilePage.clickLogoutButton();
+        });
     }
 
     @Test
@@ -65,15 +80,33 @@ public class BooksTests extends TestBase {
     @Tag("negative")
     @DisplayName("Try to add book to user profile via API without sending authorization token (failure)")
     void addBookToUnauthorizedProfileTest() {
-        LoginResponseModel loginResponse = AccountAPI.login(validAuthData);
-        booksAPI.deleteAllBooks(loginResponse);
+        step("Log in and try to add books to profile without sending authorization token", () -> {
 
-        isbnList.add(gitPocketGuideBook);
-        isbnList.add(designingWebAPIsBook);
+            LoginResponseModel loginResponse = AccountAPI.login(validAuthData);
+            booksAPI.deleteAllBooks(loginResponse);
 
-        AddBookModel booksList = new AddBookModel(loginResponse.getUserId(), isbnList);
+            isbnList.add(gitPocketGuideBook);
+            isbnList.add(designingWebAPIsBook);
 
-        booksAPI.addBookToUnauthorizedProfile(loginResponse, booksList);
+            AddBookModel booksList = new AddBookModel(loginResponse.getUserId(), isbnList);
+
+            booksAPI.addBookToUnauthorizedProfile(loginResponse, booksList);
+
+            cookiesPage.openFileToAddCookies()
+                    .addCookies(userIdCookie, loginResponse.getUserId())
+                    .addCookies(tokenCookie, loginResponse.getToken())
+                    .addCookies(expiresCookie, loginResponse.getExpires());
+        });
+        step("Check user's profile on website", () -> {
+            profilePage.openProfilePage()
+                    .checkMainHeader()
+                    .checkAuthorizedUserName(validAuthData.getUserName())
+                    .verifyGitPocketGuideIsAbsent()
+                    .verifyDesigningWebAPIsIsAbsent();
+        });
+        step("Log out", () -> {
+            profilePage.clickLogoutButton();
+        });
     }
 
     @Test
@@ -191,7 +224,7 @@ public class BooksTests extends TestBase {
             booksAPI.deleteBook(deleteEloquentJS, loginResponse);
         });
         step("Check that the book has been deleted from profile", () -> {
-            profilePage.verifyEloquentJSDeletedFromProfile();
+            profilePage.verifyEloquentJSIsAbsent();
         });
         step("Log out", () -> {
             profilePage.clickLogoutButton();
