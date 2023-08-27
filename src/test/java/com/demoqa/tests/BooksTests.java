@@ -83,7 +83,7 @@ public class BooksTests extends TestBase {
     @Tag("positive")
     @DisplayName("Delete all books from profile collection via API")
     void deleteAllBooksFromProfileTest() {
-        step("log in, add some books to profile, then delete all of them via API", () -> {
+        step("Log in, add some books to profile, then delete all of them via API", () -> {
             LoginResponseModel loginResponse = AccountAPI.login(validAuthData);
             booksAPI.deleteAllBooks(loginResponse);
 
