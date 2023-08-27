@@ -35,14 +35,6 @@ public class ResponseSpecs {
             .expectStatusCode(204)
             .build();
 
-    public static ResponseSpecification unauthorizedAccountFailedTestsResponseSpec401 = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(401)
-            .expectBody("code", notNullValue())
-            .expectBody("message", notNullValue())
-            .build();
-
     public static ResponseSpecification getUserInfoSuccessfulResponseSpec200 = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)

@@ -32,9 +32,4 @@ public class LoginPage {
         loginButton.click();
         return this;
     }
-
-    public LoginPage clickLogoutButton() {
-        logoutButton.click();
-        return this;
-    }
 }

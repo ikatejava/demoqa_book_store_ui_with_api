@@ -45,14 +45,6 @@ tasks.withType(Test) {
     }
 }
 
-compileJava {
-    options.encoding = 'UTF-8'
-}
-
-compileTestJava {
-    options.encoding = 'UTF-8'
-}
-
 task account_test(type: Test) {
     useJUnitPlatform {
         includeTags("user")
@@ -75,5 +67,13 @@ task negative_test(type: Test) {
     useJUnitPlatform {
         includeTags("negative")
     }
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
 }
 

@@ -17,8 +17,6 @@ public class ProfilePage {
             designingWebAPIsBook = $("a[href='/profile?book=9781449337711']"),
             youDontKnowJSBook = $("a[href='/profile?book=9781491904244']"),
             eloquentJSBook = $("a[href='/profile?book=9781593275846']"),
-            deleteBookIcon = $("#delete-record-undefined"),
-            deleteBookForSureButton = $("#closeSmallModal-ok"),
             booksFieldOnProfile = $(".rt-tbody");
 
     public ProfilePage openProfilePage() {
@@ -69,30 +67,9 @@ public class ProfilePage {
         return this;
     }
 
-    public ProfilePage clickDeleteBookButton() {
-        deleteBookIcon.click();
-        return this;
-    }
-
-    public ProfilePage clickTrulyWishToDelete() {
-        deleteBookForSureButton.click();
-        refresh();
-        return this;
-    }
-
-    public ProfilePage verifyBooksDeletedFromProfile() {
+    public ProfilePage verifyProfileHasNoBooks() {
         refresh();
         booksFieldOnProfile.shouldBe(empty);
-        return this;
-    }
-
-    public ProfilePage verifyGitPocketGuideIsAbsent() {
-        gitPocketGuideBook.shouldNotBe(visible);
-        return this;
-    }
-
-    public ProfilePage verifyDesigningWebAPIsIsAbsent() {
-        designingWebAPIsBook.shouldNotBe(visible);
         return this;
     }
 

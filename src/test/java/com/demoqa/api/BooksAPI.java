@@ -6,7 +6,8 @@ import com.demoqa.models.LoginResponseModel;
 import com.demoqa.models.MistakesResponseModel;
 
 import static com.demoqa.specs.RequestSpecs.booksRequestSpecification;
-import static com.demoqa.specs.ResponseSpecs.*;
+import static com.demoqa.specs.ResponseSpecs.NonExistentISBNResponse400;
+import static com.demoqa.specs.ResponseSpecs.successfulDeletionResponseSpec204;
 import static com.demoqa.tests.TestData.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -43,24 +44,6 @@ public class BooksAPI {
         });
     }
 
-    public void addBookToUnauthorizedProfile(LoginResponseModel loginResponse, AddBookModel booksList) {
-        MistakesResponseModel mistakesResponse = step("Make request", () -> {
-            return given(booksRequestSpecification)
-                    .body(booksList)
-                    .when()
-                    .post("Books")
-                    .then()
-                    .spec(unauthorizedAccountFailedTestsResponseSpec401)
-                    .extract().as(MistakesResponseModel.class);
-        });
-        step("Check response 401", () -> {
-            assertEquals(responseCode1200, mistakesResponse.getCode());
-            assertEquals(responseCode1200Message, mistakesResponse.getMessage());
-            System.out.println("\"code\": " + mistakesResponse.getCode() + ",\n\"message\": "
-                    + mistakesResponse.getMessage());
-        });
-    }
-
     public void deleteAllBooks(LoginResponseModel loginResponse) {
         given(booksRequestSpecification)
                 .header("Authorization", "Bearer " + loginResponse.getToken())
@@ -69,24 +52,6 @@ public class BooksAPI {
                 .delete("Books")
                 .then()
                 .spec(successfulDeletionResponseSpec204);
-    }
-
-    public void deleteAllBooksFromUnauthorizedProfile(LoginResponseModel loginResponse) {
-        MistakesResponseModel mistakesResponse = step("Make request", () -> {
-            return given(booksRequestSpecification)
-                    .queryParam("UserId", loginResponse.getUserId())
-                    .when()
-                    .delete("Books")
-                    .then()
-                    .spec(unauthorizedAccountFailedTestsResponseSpec401)
-                    .extract().as(MistakesResponseModel.class);
-        });
-        step("Check response 401", () -> {
-            assertEquals(responseCode1200, mistakesResponse.getCode());
-            assertEquals(responseCode1200Message, mistakesResponse.getMessage());
-            System.out.println("\"code\": " + mistakesResponse.getCode() + ",\n\"message\": "
-                    + mistakesResponse.getMessage());
-        });
     }
 
     public void deleteBook(DeleteBookModel deleteBookData, LoginResponseModel loginResponse) {
@@ -113,23 +78,6 @@ public class BooksAPI {
         step("Check response 400", () -> {
             assertEquals(responseCode1206, mistakesResponse.getCode());
             assertEquals(responseCode1206Message, mistakesResponse.getMessage());
-            System.out.println("\"code\": " + mistakesResponse.getCode() + ",\n\"message\": "
-                    + mistakesResponse.getMessage());
-        });
-    }
-
-    public void deleteBookFromUnauthorizedProfile(DeleteBookModel deleteBookData, LoginResponseModel loginResponse) {
-        MistakesResponseModel mistakesResponse = step("Make request", () -> {
-            return given(booksRequestSpecification)
-                    .when()
-                    .delete("Book")
-                    .then()
-                    .spec(unauthorizedAccountFailedTestsResponseSpec401)
-                    .extract().as(MistakesResponseModel.class);
-        });
-        step("Check response 401", () -> {
-            assertEquals(responseCode1200, mistakesResponse.getCode());
-            assertEquals(responseCode1200Message, mistakesResponse.getMessage());
             System.out.println("\"code\": " + mistakesResponse.getCode() + ",\n\"message\": "
                     + mistakesResponse.getMessage());
         });

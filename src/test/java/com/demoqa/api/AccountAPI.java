@@ -1,11 +1,14 @@
 package com.demoqa.api;
 
-import com.demoqa.models.*;
+import com.demoqa.models.LoginAndRegistrationRequestModel;
+import com.demoqa.models.LoginResponseModel;
+import com.demoqa.models.RegistrationResponseModel;
+import com.demoqa.models.UserInfoResponseModel;
 
 import static com.demoqa.specs.RequestSpecs.accountRequestWithBodySpecification;
 import static com.demoqa.specs.RequestSpecs.accountRequestWithoutBodySpecification;
 import static com.demoqa.specs.ResponseSpecs.*;
-import static com.demoqa.tests.TestData.*;
+import static com.demoqa.tests.TestData.accountUsername;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -61,23 +64,6 @@ public class AccountAPI {
                 .spec(successfulDeletionResponseSpec204);
     }
 
-    public void unauthorizedAccountDeletion(LoginResponseModel loginResponse) {
-        MistakesResponseModel mistakesResponse = step("Make request", () -> {
-            return given(accountRequestWithBodySpecification)
-                    .when()
-                    .delete("User/" + loginResponse.getUserId())
-                    .then()
-                    .spec(unauthorizedAccountFailedTestsResponseSpec401)
-                    .extract().as(MistakesResponseModel.class);
-        });
-        step("Check response 401", () -> {
-            assertEquals(responseCode1200, mistakesResponse.getCode());
-            assertEquals(responseCode1200Message, mistakesResponse.getMessage());
-            System.out.println("\"code\": " + mistakesResponse.getCode() + ",\n\"message\": "
-                    + mistakesResponse.getMessage());
-        });
-    }
-
     public static UserInfoResponseModel getUserInfo(LoginResponseModel loginResponse) {
         UserInfoResponseModel userInfoResponseModel = step("Make request", () -> {
             return given(accountRequestWithoutBodySpecification)
@@ -96,21 +82,5 @@ public class AccountAPI {
         return userInfoResponseModel;
     }
 
-    public void getUnauthorizedUserInfo(LoginResponseModel loginResponse) {
-        MistakesResponseModel mistakesResponse = step("Make request", () -> {
-            return given(accountRequestWithoutBodySpecification)
-                    .when()
-                    .get("User/" + loginResponse.getUserId())
-                    .then()
-                    .spec(unauthorizedAccountFailedTestsResponseSpec401)
-                    .extract().as(MistakesResponseModel.class);
-        });
-        step("Check response 401", () -> {
-            assertEquals(responseCode1200, mistakesResponse.getCode());
-            assertEquals(responseCode1200Message, mistakesResponse.getMessage());
-            System.out.println("\"code\": " + mistakesResponse.getCode() + ",\n\"message\": "
-                    + mistakesResponse.getMessage());
-        });
-    }
 }
 
