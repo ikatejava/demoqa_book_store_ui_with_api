@@ -1,6 +1,6 @@
 plugins {
     id 'java-library'
-    id 'io.freefair.lombok' version '8.2.2'
+    id 'io.freefair.lombok' version '8.3'
     id 'io.qameta.allure' version '2.11.2'
 }
 
@@ -11,11 +11,11 @@ repositories {
     mavenCentral()
 }
 
-def selenideVersion = "6.17.0",
+def selenideVersion = "6.17.2",
     jUnitJupiterVersion = "5.10.0",
     restAssuredVersion = "5.3.1",
-    allureSelenideVersion = "2.23.0",
-    allureRestAssuredVersion = '2.23.0',
+    allureSelenideVersion = "2.24.0",
+    allureRestAssuredVersion = '2.24.0',
     slf4jSimpleVersion = "2.0.7",
     ownerVersion = "1.0.12",
     javaFakerVersion = "1.0.2"
