@@ -5,13 +5,17 @@ public class TestData {
             accountUsername = "kate_belova",
             accountValidPassword = "$B00k_1over$",
             passwordForRegistration = "j&PSJ-Yz6D",
+
             userIdCookie = "userID",
             tokenCookie = "token",
             expiresCookie = "expires",
+
             responseCode1205 = "1205",
             responseCode1205Message = "ISBN supplied is not available in Books Collection!",
+
             responseCode1206 = "1206",
             responseCode1206Message = "ISBN supplied is not available in User's Collection!",
+
             gitPocketGuideISBN = "9781449325862",
             designingWebAPIsISBN = "9781449337711",
             youDontKnowJSISBN = "9781491904244",
