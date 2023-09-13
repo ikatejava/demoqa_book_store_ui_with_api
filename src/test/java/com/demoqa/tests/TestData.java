@@ -21,5 +21,4 @@ public class TestData {
             youDontKnowJSISBN = "9781491904244",
             eloquentJSISBN = "9781593275846",
             nonExistentISBN = "123456789";
-
 }
