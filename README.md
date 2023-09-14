@@ -29,7 +29,7 @@ ____
 <a id="tools"></a>
 > ## :ballot_box_with_check: <a name="Технологии и инструменты">**Технологии и инструменты:**</a>
 
-<p  align="center"
+<p  align="center">
 
 <code><a href="https://www.java.com/"><img width="5%" title="Java" src="media/logos/Java.svg"></a></code>
 <code><a href="https://www.jetbrains.com/idea/"><img width="5%" title="IntelliJ IDEA" src="media/logos/Intellij_IDEA.svg"></a></code>
