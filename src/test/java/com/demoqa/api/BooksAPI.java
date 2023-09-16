@@ -26,16 +26,15 @@ public class BooksAPI {
     }
 
     public void addBookWithNonExistentISBN(LoginResponseModel loginResponse, AddBookModel booksList) {
-        MistakesResponseModel mistakesResponse = step("Make request", () -> {
-            return given(booksRequestSpecification)
-                    .header("Authorization", "Bearer " + loginResponse.getToken())
-                    .body(booksList)
-                    .when()
-                    .post("Books")
-                    .then()
-                    .spec(NonExistentISBNResponse400)
-                    .extract().as(MistakesResponseModel.class);
-        });
+        MistakesResponseModel mistakesResponse = step("Make request", () ->
+                given(booksRequestSpecification)
+                .header("Authorization", "Bearer " + loginResponse.getToken())
+                .body(booksList)
+                .when()
+                .post("Books")
+                .then()
+                .spec(NonExistentISBNResponse400)
+                .extract().as(MistakesResponseModel.class));
         step("Check response 400", () -> {
             assertEquals(responseCode1205, mistakesResponse.getCode());
             assertEquals(responseCode1205Message, mistakesResponse.getMessage());
@@ -65,16 +64,15 @@ public class BooksAPI {
     }
 
     public void deleteBookWithNonExistentISBN(DeleteBookModel deleteBookData, LoginResponseModel loginResponse) {
-        MistakesResponseModel mistakesResponse = step("Make request", () -> {
-            return given(booksRequestSpecification)
-                    .header("Authorization", "Bearer " + loginResponse.getToken())
-                    .body(deleteBookData)
-                    .when()
-                    .delete("Book")
-                    .then()
-                    .spec(NonExistentISBNResponse400)
-                    .extract().as(MistakesResponseModel.class);
-        });
+        MistakesResponseModel mistakesResponse = step("Make request", () ->
+                given(booksRequestSpecification)
+                .header("Authorization", "Bearer " + loginResponse.getToken())
+                .body(deleteBookData)
+                .when()
+                .delete("Book")
+                .then()
+                .spec(NonExistentISBNResponse400)
+                .extract().as(MistakesResponseModel.class));
         step("Check response 400", () -> {
             assertEquals(responseCode1206, mistakesResponse.getCode());
             assertEquals(responseCode1206Message, mistakesResponse.getMessage());

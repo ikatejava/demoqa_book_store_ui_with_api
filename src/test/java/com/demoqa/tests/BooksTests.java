@@ -29,7 +29,7 @@ public class BooksTests extends TestBase {
 
             booksAPI.addBookToProfile(loginResponse, booksList);
 
-            cookiesPage.openFileToAddCookies()
+            driverCookieUtils.openFileToAddCookies()
                     .addCookies(userIdCookie, loginResponse.getUserId())
                     .addCookies(tokenCookie, loginResponse.getToken())
                     .addCookies(expiresCookie, loginResponse.getExpires());
@@ -61,7 +61,7 @@ public class BooksTests extends TestBase {
 
             booksAPI.addBookWithNonExistentISBN(loginResponse, booksList);
 
-            cookiesPage.openFileToAddCookies()
+            driverCookieUtils.openFileToAddCookies()
                     .addCookies(userIdCookie, loginResponse.getUserId())
                     .addCookies(tokenCookie, loginResponse.getToken())
                     .addCookies(expiresCookie, loginResponse.getExpires());
@@ -96,7 +96,7 @@ public class BooksTests extends TestBase {
 
             booksAPI.addBookToProfile(loginResponse, booksList);
 
-            cookiesPage.openFileToAddCookies()
+            driverCookieUtils.openFileToAddCookies()
                     .addCookies(userIdCookie, loginResponse.getUserId())
                     .addCookies(tokenCookie, loginResponse.getToken())
                     .addCookies(expiresCookie, loginResponse.getExpires());
@@ -138,7 +138,7 @@ public class BooksTests extends TestBase {
 
             booksAPI.addBookToProfile(loginResponse, booksList);
 
-            cookiesPage.openFileToAddCookies()
+            driverCookieUtils.openFileToAddCookies()
                     .addCookies(userIdCookie, loginResponse.getUserId())
                     .addCookies(tokenCookie, loginResponse.getToken())
                     .addCookies(expiresCookie, loginResponse.getExpires());
@@ -181,7 +181,7 @@ public class BooksTests extends TestBase {
 
             booksAPI.addBookToProfile(loginResponse, booksList);
 
-            cookiesPage.openFileToAddCookies()
+            driverCookieUtils.openFileToAddCookies()
                     .addCookies(userIdCookie, loginResponse.getUserId())
                     .addCookies(tokenCookie, loginResponse.getToken())
                     .addCookies(expiresCookie, loginResponse.getExpires());

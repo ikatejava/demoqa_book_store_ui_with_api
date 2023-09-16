@@ -30,21 +30,19 @@ public class ProfilePage {
     }
 
     public ProfilePage checkAuthorizedUserName(String login) {
+        userNameValue.shouldHave(text(login));
         String authorizedUserName = userNameValue.getText();
-        authorizedUserName.equals(login);
         System.out.println(authorizedUserName);
         return this;
     }
 
-    public ProfilePage clickLogoutButton() {
+    public void clickLogoutButton() {
         logoutButton.click();
-        return this;
     }
 
-    public ProfilePage verifyAccountDoesntExistAnymore() {
+    public void verifyAccountDoesntExistAnymore() {
         refresh();
         userNotFoundText.shouldHave(text("User not found!"));
-        return this;
     }
 
     public ProfilePage checkGitPocketGuidePresence() {
@@ -62,20 +60,17 @@ public class ProfilePage {
         return this;
     }
 
-    public ProfilePage checkEloquentJSPresense() {
+    public void checkEloquentJSPresense() {
         eloquentJSBook.shouldBe(visible);
-        return this;
     }
 
-    public ProfilePage verifyProfileHasNoBooks() {
+    public void verifyProfileHasNoBooks() {
         refresh();
         booksFieldOnProfile.shouldBe(empty);
-        return this;
     }
 
-    public ProfilePage verifyEloquentJSIsAbsent() {
+    public void verifyEloquentJSIsAbsent() {
         refresh();
         eloquentJSBook.shouldNotBe(visible);
-        return this;
     }
 }

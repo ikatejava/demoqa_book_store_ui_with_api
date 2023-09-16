@@ -28,8 +28,7 @@ public class LoginPage {
         return this;
     }
 
-    public LoginPage clickLoginButton() {
+    public void clickLoginButton() {
         loginButton.click();
-        return this;
     }
 }

@@ -18,7 +18,7 @@ public class AccountTests extends TestBase {
         step("Log in via API, get response body cookies and add them to small file", () -> {
             LoginResponseModel loginResponse = AccountAPI.login(validAuthData);
 
-            cookiesPage.openFileToAddCookies()
+            driverCookieUtils.openFileToAddCookies()
                     .addCookies(userIdCookie, loginResponse.getUserId())
                     .addCookies(tokenCookie, loginResponse.getToken())
                     .addCookies(expiresCookie, loginResponse.getExpires());
@@ -92,7 +92,7 @@ public class AccountTests extends TestBase {
         step("Authorize via API then on website, and check user's profile", () -> {
             LoginResponseModel loginResponse = AccountAPI.login(validAuthData);
 
-            cookiesPage.openFileToAddCookies()
+            driverCookieUtils.openFileToAddCookies()
                     .addCookies(userIdCookie, loginResponse.getUserId())
                     .addCookies(tokenCookie, loginResponse.getToken())
                     .addCookies(expiresCookie, loginResponse.getExpires());

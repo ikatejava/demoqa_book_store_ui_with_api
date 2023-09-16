@@ -8,7 +8,7 @@ import com.demoqa.config.WebConfig;
 import com.demoqa.helpers.Attach;
 import com.demoqa.models.IsbnModel;
 import com.demoqa.models.LoginAndRegistrationRequestModel;
-import com.demoqa.pages.CookiesPage;
+import com.demoqa.utils.DriverCookieUtils;
 import com.demoqa.pages.LoginPage;
 import com.demoqa.pages.ProfilePage;
 import com.github.javafaker.Faker;
@@ -31,7 +31,7 @@ import static com.demoqa.tests.TestData.*;
 public class TestBase {
     static WebConfig config = ConfigFactory.create(WebConfig.class, System.getProperties());
 
-    CookiesPage cookiesPage = new CookiesPage();
+    DriverCookieUtils driverCookieUtils = new DriverCookieUtils();
     LoginPage loginPage = new LoginPage();
     ProfilePage profilePage = new ProfilePage();
 
@@ -58,6 +58,7 @@ public class TestBase {
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
         Configuration.pollingInterval = 400;
+        Configuration.timeout = 4000;
         Configuration.baseUrl = config.baseUrl();
         RestAssured.baseURI = "https://demoqa.com/";
         Configuration.browser = config.browser();
@@ -77,7 +78,6 @@ public class TestBase {
     @BeforeEach
     void beforeEach() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        Configuration.timeout = 4000;
     }
 
     @AfterEach
