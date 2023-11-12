@@ -11,7 +11,6 @@ public class LoginPage {
             userName = $("#userName"),
             userPassword = $("#password"),
             loginButton = $("#login");
-//            logoutButton = $("#submit");
 
     public LoginPage openLoginPage() {
         open(loginPagePath);
