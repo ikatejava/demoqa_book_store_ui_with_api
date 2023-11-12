@@ -13,13 +13,13 @@ public class RequestSpecs {
             .log().body()
             .filter(withCustomTemplates())
             .contentType(JSON)
-            .basePath("Account/v1/");
+            .basePath("/account/v1/");
 
     public static RequestSpecification accountRequestWithoutBodySpecification = with()
             .log().uri()
             .log().method()
             .filter(withCustomTemplates())
-            .basePath("Account/v1/");
+            .basePath("/account/v1/");
 
     public static RequestSpecification booksRequestSpecification = with()
             .log().uri()
@@ -27,5 +27,5 @@ public class RequestSpecs {
             .log().body()
             .filter(withCustomTemplates())
             .contentType(JSON)
-            .basePath("BookStore/v1/");
+            .basePath("/bookStore/v1/");
 }

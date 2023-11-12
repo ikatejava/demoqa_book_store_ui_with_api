@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class DriverCookieUtils {
-    String loginPagePath = "favicon.ico";
+    String loginPagePath = "/favicon.ico";
 
     public DriverCookieUtils openFileToAddCookies() {
         open(loginPagePath);

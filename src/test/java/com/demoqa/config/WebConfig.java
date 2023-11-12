@@ -17,7 +17,7 @@ public interface WebConfig extends Config {
     String browserSize();
 
     @Key("baseUrl")
-    @DefaultValue("https://demoqa.com/")
+    @DefaultValue("https://demoqa.com")
     String baseUrl();
 
     @Key("remoteUrl")

@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ProfilePage {
-    String profilePagePath = "profile";
+    String profilePagePath = "/profile";
 
     SelenideElement
             mainHeader = $(".main-header"),

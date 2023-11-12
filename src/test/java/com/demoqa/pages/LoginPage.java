@@ -6,12 +6,12 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage {
-    String loginPagePath = "login";
+    String loginPagePath = "/login";
     SelenideElement
             userName = $("#userName"),
             userPassword = $("#password"),
-            loginButton = $("#login"),
-            logoutButton = $("#submit");
+            loginButton = $("#login");
+//            logoutButton = $("#submit");
 
     public LoginPage openLoginPage() {
         open(loginPagePath);
